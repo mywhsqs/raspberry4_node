@@ -1,0 +1,33 @@
+### Compilation main.c
+gcc main.c hackrf_setting.c database.c cJSON.c -o main -lpthread -lmysqlclient -lm
+
+### Compilation for raspbery
+gcc main.c hackrf_setting.c database.c cJSON.c -o main -lpthread -lmysqlclient -lm -l wiringPi
+ 
+### Compilation spectrum.c for spectrum sensing
+gcc spectrum.c hackrf_setting.c database.c -o spectrum -lpthread -lmysqlclient
+
+### Compilation main.c with math
+gcc main.c hackrf_setting.c database.c -o main -lpthread -lmysqlclient -lm
+
+
+### Other
+./gps-sdr-sim -e brdc3540.14n -l 20.060878409363493,110.32426803405772,100 -b 8 -d 100
+
+
+hackrf_transfer -d 0000000000000000954863c8334e4d23 -t ./signal/left_rotate.iq -f 921000000 -s 12500000 -a 1 -l 40 -x 47
+
+
+hackrf_transfer -d 0000000000000000866863dc2b2848cf -t ./gpssim.bin -f 1575420000 -s 2600000 -a 1 -x 25 -R
+
+### scan iq 20220121
+gcc main.c hackrf_setting.c -o main -lpthread -lm -l wiringPi
+
+
+### scan iq 20220121
+hwclock: ioctl(RTC_RD_TIME) to /dev/rtc to read the time failed: Invalid argument
+Solution !!!
+date --set="2022-09-29 10:10:30"
+hwclock --systohc -D --noadjfile --utc
+hwclock --set --date "2022-09-29 10:11:30"
+
